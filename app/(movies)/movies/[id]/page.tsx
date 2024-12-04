@@ -1,6 +1,18 @@
-import MovieInfos from "../../../../components/movie-info";
+import MovieInfos, {getMovies} from "../../../../components/movie-info";
 import MovieVideos from "../../../../components/movie-video";
 import {Suspense} from "react";
+
+interface IParams{
+  params: {id: string};
+}
+
+export async function generateMetadata({params:{id}}:IParams) {
+  const movie = await getMovies(id)
+
+  return {
+    title: movie.title,
+  }
+}
 
 export default async function MovieDetail({
 params
